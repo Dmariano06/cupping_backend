@@ -15,8 +15,58 @@ public class User implements Serializable {
     @Column(name = "first_name", length = 50)
     private String firstName;
 
-    @Column(name = "last_name", length = 50)
-    private String lastName;
+    @Column
+    private String email;
+    @Column
+    private String subject = "Confirmation  de la récéption de votre demande de rendez-vous";
+
+    public String getSeller_subject() {
+        return seller_subject;
+    }
+
+    public void setSeller_subject(String seller_subject) {
+        this.seller_subject = seller_subject;
+    }
+
+    @Column
+    private String seller_subject = "Demande de Rendez-vous";
+    @Column
+    private String message= "votre mail a bien été pris en compte nous vous contacterons au plus vite ";
+
+    public String getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(String reservation) {
+        this.reservation = reservation;
+    }
+
+    @Column(name = "reservation")
+    private String reservation;
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public Long getId() {
         return id;
@@ -34,11 +84,4 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }
