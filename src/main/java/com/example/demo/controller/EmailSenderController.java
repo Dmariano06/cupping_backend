@@ -37,23 +37,23 @@ public class EmailSenderController {
         String lastName = (String) payload.get("lastName");
         String email = (String) payload.get("email");
         String selectedDate = (String) payload.get("selectedDate");
-        String message = (String) payload.get("message");
         String selectedTime = (String) payload.get("selectedTime");
-
+        String message = (String) payload.get("message");
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
 
         try {
-            helper.setTo("therapycupping57@gmail.com");
+            helper.setTo(email);
             helper.setSubject("Nouveau formulaire soumis depuis Angular");
+            helper.addCc("therapycupping57@gmail.com");
             helper.setText(
                     "Prénom: " + firstName + "\n" +
                             "Nom: " + lastName + "\n" +
                             "E-mail: " + email + "\n" +
                             "Date sélectionnée: " + selectedDate + "\n" +
-                            "Heure sélectionée: " + selectedTime + "\n" +
-                            "Message: " + message + "\n"
+                            "Heure sélectionnée:" + selectedTime + "\n" +
+                            "Message: " + message
             );
         } catch (MessagingException e) {
             e.printStackTrace();
