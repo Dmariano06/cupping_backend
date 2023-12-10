@@ -3,7 +3,14 @@ package com.example.demo.controller;
 import com.example.demo.entity.User;
 import com.example.demo.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.Map;
 
 
 @RestController
@@ -20,4 +27,41 @@ public class EmailSenderController {
         senderService.sendRequest(user);
         return "Email sent successfully!";
     }
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @PostMapping("/send-email")
+    public String sendEmail(@RequestBody Map<String, Object> payload) {
+        String firstName = (String) payload.get("firstName");
+        String lastName = (String) payload.get("lastName");
+        String email = (String) payload.get("email");
+        String selectedDate = (String) payload.get("selectedDate");
+        String message = (String) payload.get("message");
+        String selectedTime = (String) payload.get("selectedTime");
+
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+
+        try {
+            helper.setTo("therapycupping57@gmail.com");
+            helper.setSubject("Nouveau formulaire soumis depuis Angular");
+            helper.setText(
+                    "Prénom: " + firstName + "\n" +
+                            "Nom: " + lastName + "\n" +
+                            "E-mail: " + email + "\n" +
+                            "Date sélectionnée: " + selectedDate + "\n" +
+                            "Heure sélectionée: " + selectedTime + "\n" +
+                            "Message: " + message + "\n"
+            );
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        javaMailSender.send(mimeMessage);
+
+        return "E-mail envoyé avec succès !";
+    }
+
 }
