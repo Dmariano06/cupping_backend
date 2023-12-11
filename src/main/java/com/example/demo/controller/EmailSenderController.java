@@ -45,15 +45,17 @@ public class EmailSenderController {
 
         try {
             helper.setTo(email);
-            helper.setSubject("Nouveau formulaire soumis depuis Angular");
+            helper.setSubject("Récapitulatif de votre demande de rendez-vous");
             helper.addCc("therapycupping57@gmail.com");
             helper.setText(
+                    "Voici les informations que vous nous avez transmises:" + "\n" +
                     "Prénom: " + firstName + "\n" +
                             "Nom: " + lastName + "\n" +
                             "E-mail: " + email + "\n" +
                             "Date sélectionnée: " + selectedDate + "\n" +
                             "Heure sélectionnée:" + selectedTime + "\n" +
-                            "Message: " + message
+                            "Message: " + message + "\n" +
+                            "Nous vous contacterons dès que possible pour confirmer votre rendez-vous. Si le créneau que vous avez choisi n'est pas disponible, nous vous proposerons une autre option de rendez-vous."
             );
         } catch (MessagingException e) {
             e.printStackTrace();
