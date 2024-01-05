@@ -48,7 +48,7 @@ public class EmailSenderController {
             helper.setSubject("Récapitulatif de votre demande de rendez-vous");
             helper.addCc("therapycupping57@gmail.com");
             helper.setText(
-                    "Voici les informations que vous nous avez transmises:" + "\n" +
+                    "Voici les informations que vous nous avez transmisesf:" + "\n" +
                     "Prénom: " + firstName + "\n" +
                             "Nom: " + lastName + "\n" +
                             "E-mail: " + email + "\n" +
